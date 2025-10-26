@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Consent Popup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f0f2f5;
+    }
+
+    /* Button */
+    .open-btn {
+      background: #2563eb;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .open-btn:hover {
+      background: #1e4fc7;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none; /* hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      max-width: 800px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 10px;
+      position: relative;
+    }
+    .modal h2 {
+      color: #2563eb;
+      margin-top: 1rem;
+    }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #333;
+    }
+    .consent-box {
+      margin-top: 20px;
+      padding: 12px;
+      background: #f9fafb;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+    .consent-box label {
+      cursor: pointer;
+    }
+    .agree-btn {
+      margin-top: 10px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .agree-btn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <!-- Trigger button -->
+  <button class="open-btn" id="openModal">View Registration Procedure</button>
+
+  <!-- Modal -->
+  <div class="modal" id="procedureModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h1>Step-by-Step Registration Procedure</h1>
+
+      <h2>Applicant Steps</h2>
+      <ol>
+        <li>Open the registration page.</li>
+        <li>Create an account with email, mobile number, and password.</li>
+        <li>Verify your contact (email link or mobile OTP).</li>
+        <li>Fill in personal information.</li>
+        <li>Choose academic options (strand, grade level, schedule).</li>
+        <li>Upload required documents.</li>
+        <li>Review all information before submission.</li>
+        <li>Pay fees (if applicable).</li>
+        <li>Submit application and receive a reference number.</li>
+        <li>Wait for confirmation via email/SMS.</li>
+      </ol>
+
+      <h2>Admin / Back-Office Steps</h2>
+      <ol>
+        <li>System validates required fields and uploads.</li>
+        <li>Staff review submitted documents.</li>
+        <li>Allocate strand slots and notify applicants.</li>
+        <li>Schedule exams or interviews.</li>
+        <li>Approve accepted students and issue enrollment number.</li>
+        <li>Confirm payment and issue receipt.</li>
+        <li>Send orientation details.</li>
+        <li>Archive documents and generate reports.</li>
+      </ol>
+
+      <section>
+      <h2>Validation Rules & Policies</h2>
+      <ul>
+        <li>Email, mobile, password, and personal info are required.</li>
+        <li>Password must be at least 8 characters with letters and numbers.</li>
+        <li>Mobile must be 11 digits starting with 09.</li>
+        <li>File uploads must be JPG, PNG, or PDF (max 5MB).</li>
+        <li>Applicants must agree to Terms & Privacy Policy.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Notifications</h2>
+      <ul>
+        <li>Verification email / OTP message.</li>
+        <li>Submission receipt with reference number.</li>
+        <li>Document request notice if files are missing.</li>
+        <li>Decision notice (accepted, waitlisted, or rejected).</li>
+        <li>Payment receipt and reminders for exams or orientation.</li>
+      </ul>
+    </section>
+
+      <div class="consent-box">
+        <input type="checkbox" id="agreeCheckbox">
+        <label for="agreeCheckbox"> I have read and agree to this registration procedure and consent.</label>
+        <br>
+        <button class="agree-btn" id="agreeBtn" disabled>I Agree</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const openModal = document.getElementById("openModal");
+    const modal = document.getElementById("procedureModal");
+    const closeModal = document.getElementById("closeModal");
+    const checkbox = document.getElementById("agreeCheckbox");
+    const agreeBtn = document.getElementById("agreeBtn");
+
+    // Open modal
+    openModal.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+
+    // Close modal
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    // Enable button when checkbox is ticked
+    checkbox.addEventListener("change", () => {
+      agreeBtn.disabled = !checkbox.checked;
+    });
+
+    // Handle consent button
+    agreeBtn.addEventListener("click", () => {
+      alert("Thank you! You agreed to the consent.");
+      modal.style.display = "none";
+    });
+
+    // Close modal if clicked outside content
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

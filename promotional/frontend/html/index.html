@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/alldesign.css">
+    <title>SHS</title>
+</head>
+<body>
+    <header class="container">
+       <nav>
+            <div class="logo">
+                <a href="#">
+                <img src="../../images/logo.png" alt="">
+                <p><span class="text">Senior High School</span><br>Southville 8B</p>
+                </a>
+            </div>
+
+            <!-- Hamburger -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+
+            <!-- Navigation Links inside nav so it shares row with logo -->
+            <ul id="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/aboutus">About Us</a></li>
+                <li><a href="/admission">Admission</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+
+
+        <main>
+            <header class="hero-section">
+                <div class="hero-overlay"></div>
+                
+                <div class="hero-content">
+                    <h1>Welcome to Senior High School Portal</h1>
+                    <p>
+                    Academic Year 2025–2026 Enrollment Now Open!  
+                    Discover programs that help shape your future in STEM, ABM, HUMSS, TVL, Arts & Sports.
+                    </p>
+                </div>
+            </header>
+
+
+
+
+
+
+
+            <section class="featured-video-section">
+                <div class="featured-video">
+                    <video controls autoplay muted playsinline poster="../images/video-poster.jpg">
+                    <source src="../../video/sv8bshs.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="enroll-strands">
+                    <h3>🌟 Try Our New Strand Recommendation!</h3>
+                    <p>Not sure which strand suits you best? Take our quick assessment to find the perfect strand based on your interests and skills.</p>
+
+                    <div class="strand-card">
+                        <div class="strand-card-left">
+                        </div>
+                        <div class="strand-card-right">
+                            <h2>Find Your Perfect Strand 🎯</h2>
+                            <p>Answer a few fun questions and discover which strand will help you excel academically and personally.</p>
+                            <a href="/assessment" class="btn-recommend" target="_blank" rel="noopener noreferrer">Take the Assessment</a>
+                        </div>
+                    </div>
+                </div>
+                </section>
+
+
+
+            <section class="news-section">
+                <div class="news-header">
+                    <h2>Latest News & Events</h2>
+                    <a href="#">See All News →</a>
+                </div>
+
+                <div class="news-box">
+                    <!-- === LEFT SIDE: NEWS CARDS === -->
+                    <div class="news-layout">
+                    <div class="news-left">
+                        <div class="news-card big">
+                        <img src="../../images/news.jpg" alt="News Image">
+                        </div>
+                    </div>
+
+                    <div class="news-right">
+                        <div class="news-card small">
+                        <img src="../../images/news2.jpg" alt="News Image">
+                        <div class="news-overlay">
+                            <h3>Parent Seminar</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        </div>
+
+                        <div class="news-card small">
+                        <img src="../../images/news3.jpg" alt="News Image">
+                        <div class="news-overlay">
+                            <h3>Project E.N.G.A.G.E.</h3>
+                            <p>Sayaw ng Gintong Ala-ala</p>
+                        </div>
+                        </div>
+                        
+                    </div>
+                    </div>
+
+                    <!-- === RIGHT SIDE: INFO CARDS === -->
+                    <div class="head-info">
+                    <div class="info dark">
+                        <p class="subtitle">Visit our</p>
+                        <h3>Office of the Director</h3>
+                        <a href="#" class="learn-btn">Learn More ›</a>
+                    </div>
+
+                    <div class="info yellow">
+                        <p class="subtitle">Visit our</p>
+                        <h3>Office of the Principal</h3>
+                        <a href="./principal.html" class="learn-btn">Learn More ›</a>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+             
+            <section>
+                <div class="join-now-section">
+                    <div class="join-now-box">
+                        <h1>Want to be <br> an Southvillians?</h1>
+                        <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer">ADMISSION FORM ONLINE REGISTRATION</a>
+                    </div>
+                </div>
+            </section>
+
+
+
+           
+
+
+        
+
+
+
+
+
+            <footer>
+                <div class="footer-content">
+                    <p>&copy; 2025 Southville 8B | All Rights Reserved | Contact: info@southville8b.edu.ph</p>
+                    <p>Follow us: <a href="">Facebook</a> | <a href="">Instagram</a> | <a href="">Twitter</a></p>
+                </div>
+            </footer>
+        </main>
+    </header>
+
+
+    <script>
+const toggle = document.getElementById("menu-toggle");
+const navLinks = document.getElementById("nav-links");
+
+toggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+// Submenu toggle on mobile
+const submenuParents = document.querySelectorAll("#nav-links li > a");
+
+submenuParents.forEach(link => {
+  link.addEventListener("click", e => {
+    if (window.innerWidth <= 768 && link.nextElementSibling) {
+      e.preventDefault(); // prevent navigation
+      link.parentElement.classList.toggle("show");
+    }
+  });
+});
+
+    </script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- <section>
+                <h1>Registration Steps</h1>
+
+                <div class="timeline">
+                    <div class="card">
+                        <h3>REGISTRATION</h3>
+                        <p>Create account with email, mobile, and password; accept terms.</p>
+                    </div>
+                    <div class="step">
+                        <div class="circle">1</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>DOCUMENTS</h3>
+                        <p>Upload report card, birth certificate, ID, and photo.</p>
+                    </div>
+                    <div class="step">
+                        <div class="circle">2</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>PERSONAL INFO</h3>
+                        <p>Fill in name, birthday, gender, address, and guardian contact.</p>
+                    </div>
+                    <div class="step">
+                        <div class="circle">3</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>ACADEMIC</h3>
+                        <p>Select preferred strand, grade level, and backup if needed.</p>
+                    </div>
+                    <div class="step">
+                        <div class="circle">4</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>SUBMIT</h3>
+                        <p>Review details and documents, then confirm your application.</p>
+                    </div>
+                    <div class="step">
+                        <div class="circle">5</div>
+                    </div>
+                </div>
+            </section> -->
+
+<!-- 
+h1 {
+    text-align: center;
+    color: #1d4ed8;
+    margin: 3rem 0;
+}
+
+.timeline {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    gap: 2rem;
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+}
+
+/* vertical line */
+.timeline::after {
+    content: "";
+    position: absolute;
+    right: 60px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #d1d5db;
+}
+
+.step {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #1d4ed8;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1rem;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* cut off top and bottom line */
+.step:first-of-type::after,
+.step:last-of-type::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    background: #f3f4f6;
+    z-index: 2;
+}
+
+.step:first-of-type::after { top: -100%; height: 50%; }
+.step:last-of-type::after { bottom: -100%; height: 50%; }
+
+.card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    margin: 0 0 0.5rem;
+    color: #1d4ed8;
+} -->
+
+
+
+
+
+
+
+
+            
+            <!-- <section class="strand-offer">
+                <div class="strand-title">
+                    <p>OUR STRAND</p>
+                </div>
+                <div class="strand-available">
+                    <div class="strand-box">
+                        HUMMS
+                    </div>
+                    <div class="strand-box">
+                        TVL
+                    </div>
+                    <div class="strand-box">
+                        AUTOMOTIVE
+                    </div>
+                    <div class="strand-box">
+                        ABM
+                    </div>
+                    <div class="strand-box">
+                        ARTS
+                    </div>
+                    <div class="strand-box">
+                        KINEME
+                    </div>
+                </div>
+            </section> -->

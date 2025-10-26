@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Assessment | Enrollment System</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(180deg, #f4f7fb, #ffffff);
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    header {
+      background: #4a69bd;
+      color: white;
+      text-align: center;
+      padding: 1.2rem 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      max-width: 750px;
+      margin: 1.5rem auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h2 {
+      color: #1b2a49;
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 15px;
+      background: #e6e9ff;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: #4a69bd;
+      transition: width 0.4s ease;
+    }
+
+    .question-box {
+      display: none;
+      animation: fadeIn 0.5s ease;
+      text-align: left;
+    }
+
+    .question-box.active {
+      display: block;
+    }
+
+    .question-box h3 {
+      font-size: 1.2rem;
+      color: #0b2c48;
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      padding: 0.7rem 1rem;
+      background: #f9fafc;
+      border-radius: 10px;
+      margin-bottom: 0.7rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    label:hover {
+      background: #eef1ff;
+    }
+
+    input[type="radio"] {
+      accent-color: #4a69bd;
+      margin-right: 10px;
+      transform: scale(1.2);
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+    }
+
+    button {
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .next-btn {
+      background: #4a69bd;
+    }
+
+    .next-btn:hover {
+      background: #6a89cc;
+      transform: scale(1.05);
+    }
+
+    .back-btn {
+      background: #999;
+    }
+
+    .back-btn:hover {
+      background: #777;
+      transform: scale(1.05);
+    }
+
+    .result {
+      display: none;
+      text-align: center;
+      margin-top: 2rem;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .course-title {
+      color: #4a69bd;
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-btns {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .result-btns button {
+      background: #4a69bd;
+      border: none;
+      color: white;
+      padding: 0.8rem 1.8rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .result-btns button:hover {
+      background: #6a89cc;
+      transform: scale(1.05);
+    }
+
+    /* Start screen styling */
+    #startScreen {
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    #startScreen button {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>Course Assessment</header>
+
+  <div class="container">
+    <!-- Start Screen -->
+    <div id="startScreen">
+      <h2>🎓 Welcome to the Course Fit Assessment</h2>
+      <p>Answer honestly to discover which Senior High School strand suits your interests and skills best.</p>
+      <button class="next-btn" onclick="startQuiz()">Start Assessment</button>
+      <button class="back-btn" onclick="goHome()">Go Back Home</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <form id="quizForm" style="display: none;">
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div id="questions"></div>
+    </form>
+
+    <!-- Result Section -->
+    <div class="result" id="resultBox">
+      <h3>Your Recommended Strand:</h3>
+      <p class="course-title" id="resultText"></p>
+      <p id="courseDescription"></p>
+      <div class="result-btns">
+        <button type="button" onclick="retake()">Retake Assessment</button>
+        <button type="button" onclick="goHome()">Go Back Home</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+const questions = [
+    // ⚙️ EIM - Electrical Installation & Management (10)
+    { q: "I enjoy working with electrical circuits or tools.", c: "EIM" },
+    { q: "I’m interested in electrical safety and wiring systems.", c: "EIM" },
+    { q: "I like solving technical or mechanical problems.", c: "EIM" },
+    { q: "I prefer hands-on work such as fixing or building things.", c: "EIM" },
+    { q: "I can follow diagrams or technical instructions well.", c: "EIM" },
+    { q: "I’m patient when doing detailed tasks with my hands.", c: "EIM" },
+    { q: "I enjoy learning how electrical components work together.", c: "EIM" },
+    { q: "I find satisfaction in repairing broken gadgets or appliances.", c: "EIM" },
+    { q: "I like ensuring safety and order in my workspace.", c: "EIM" },
+    { q: "I’m confident using hand tools and equipment.", c: "EIM" },
+
+    // 🚗 ATS - Automotive Servicing (10)
+    { q: "I like fixing or maintaining vehicles.", c: "ATS" },
+    { q: "I enjoy learning how engines and machines function.", c: "ATS" },
+    { q: "I’m interested in diagnosing and repairing mechanical issues.", c: "ATS" },
+    { q: "I prefer working in a garage or workshop environment.", c: "ATS" },
+    { q: "I’m curious about how vehicles are assembled and repaired.", c: "ATS" },
+    { q: "I like using tools and machines for maintenance tasks.", c: "ATS" },
+    { q: "I enjoy solving problems related to engines and motors.", c: "ATS" },
+    { q: "I prefer practical lessons over theoretical ones.", c: "ATS" },
+    { q: "I can work carefully with moving parts and tools.", c: "ATS" },
+    { q: "I enjoy learning about automotive technology and systems.", c: "ATS" },
+
+    // 🧠 HUMSS - Humanities & Social Sciences (10)
+    { q: "I enjoy reading, writing, or expressing my thoughts clearly.", c: "HUMSS" },
+    { q: "I like discussing social or ethical issues.", c: "HUMSS" },
+    { q: "I enjoy helping others understand complex ideas.", c: "HUMSS" },
+    { q: "I’m confident speaking or presenting in front of others.", c: "HUMSS" },
+    { q: "I think deeply about people, emotions, and society.", c: "HUMSS" },
+    { q: "I’m interested in history, politics, or culture.", c: "HUMSS" },
+    { q: "I like listening to others and giving advice.", c: "HUMSS" },
+    { q: "I enjoy organizing community or school activities.", c: "HUMSS" },
+    { q: "I prefer teamwork and communication-based work.", c: "HUMSS" },
+    { q: "I value creativity and expression through words or art.", c: "HUMSS" },
+  ];
+
+    let current = 0;
+    let scores = { EIM: 0, ATS: 0, HUMSS: 0 };
+    const answers = {};
+
+    const container = document.getElementById("questions");
+    const progressBar = document.getElementById("progressBar");
+    const resultBox = document.getElementById("resultBox");
+
+    function startQuiz() {
+      document.getElementById("startScreen").style.display = "none";
+      document.getElementById("quizForm").style.display = "block";
+      showQuestion();
+    }
+
+    function showQuestion() {
+      if (current >= questions.length) {
+        showResult();
+        return;
+      }
+
+      const q = questions[current];
+      container.innerHTML = `
+        <div class="question-box active">
+          <h3>Question ${current + 1} of ${questions.length}</h3>
+          <p>${q.q}</p>
+          ${[1, 2, 3, 4, 5].map(val => `
+            <label>
+              <input type="radio" name="answer" value="${val}" ${answers[current] == val ? "checked" : ""}>
+              ${["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"][val - 1]}
+            </label>
+          `).join("")}
+          <div class="btn-group">
+            <button type="button" class="back-btn" onclick="prevQuestion()" ${current === 0 ? "disabled style='opacity:0.5;cursor:not-allowed;'" : ""}>Back</button>
+            <button type="button" class="next-btn" onclick="nextQuestion()">${current === questions.length - 1 ? "Finish" : "Next"}</button>
+          </div>
+        </div>
+      `;
+
+      progressBar.style.width = ((current / questions.length) * 100) + "%";
+    }
+
+    function nextQuestion() {
+      const answer = document.querySelector("input[name='answer']:checked");
+      if (!answer) {
+        alert("Please select an answer before proceeding!");
+        return;
+      }
+
+      const weight = parseInt(answer.value);
+      answers[current] = weight;
+      current++;
+      showQuestion();
+    }
+
+    function prevQuestion() {
+      if (current > 0) {
+        current--;
+        showQuestion();
+      }
+    }
+
+function showResult() {
+  // Reset all scores
+  scores = { EIM: 0, ATS: 0, HUMSS: 0 };
+
+  // Recalculate based on all stored answers
+  Object.keys(answers).forEach(i => {
+    const category = questions[i].c;
+    scores[category] += answers[i];
+  });
+
+  document.getElementById("quizForm").style.display = "none";
+  resultBox.style.display = "block";
+  progressBar.style.width = "100%";
+
+  const maxScore = Math.max(scores.EIM, scores.ATS, scores.HUMSS);
+  const topCourses = Object.keys(scores).filter(k => scores[k] === maxScore);
+
+  let result, description;
+
+  if (topCourses.length > 1) {
+    // 🟦 Tie result
+    result = "Did you Answer Honestly?";
+    const tiedNames = topCourses.map(c => ({
+      EIM: "TVL - Electrical Installation and Management (EIM)",
+      ATS: "TVL - Automotive Servicing (ATS)",
+      HUMSS: "ACAD - Humanities & Social Sciences (HUMSS)"
+    }[c])).join(" and ");
+
+    description = `You have shown equal strengths in multiple strands: ${tiedNames}. 
+    You may explore each further based on your personal interests or try hands-on experiences to decide which fits best.`;
+
+  } else {
+    // 🟩 Normal highest score logic
+    const winner = topCourses[0];
+    if (winner === "EIM") {
+      result = "TVL - Electrical Installation and Management (EIM)";
+      description = "You show a strong aptitude for technical and practical work. You enjoy working with your hands, solving electrical problems, and ensuring safety and precision.";
+    } else if (winner === "ATS") {
+      result = "TVL - Automotive Servicing (ATS)";
+      description = "You are mechanically inclined and curious about how things work. You enjoy diagnosing problems and maintaining vehicles or machinery.";
+    } else {
+      result = "ACAD - Humanities & Social Sciences (HUMSS)";
+      description = "You excel in communication, critical thinking, and social awareness. This strand suits those interested in people, ideas, and expression.";
+    }
+  }
+
+  document.getElementById("resultText").innerText = result;
+  document.getElementById("courseDescription").innerText = description;
+}
+
+
+    function goHome() {
+      window.location.href = "/";
+    }
+
+    function retake() {
+      current = 0;
+      scores = { EIM: 0, ATS: 0, HUMSS: 0 };
+      for (let key in answers) delete answers[key];
+      resultBox.style.display = "none";
+      document.getElementById("quizForm").style.display = "none";
+      document.getElementById("startScreen").style.display = "block";
+      progressBar.style.width = "0%";
+    }
+  </script>
+</body>
+</html>

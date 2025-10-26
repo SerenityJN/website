@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admission | SVSHS Online Application</title>
+  <link rel="stylesheet" href="../css/alldesign.css" />
+  <style>
+
+
+
+    /* --- HERO SECTION --- */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(135deg, #004aad, #0077ff);
+      color: #fff;
+    }
+
+    /* --- CATEGORY BUTTONS --- */
+    .category-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .category-buttons button {
+      padding: 10px 20px;
+      border: none;
+      background: #0077ff;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .category-buttons button.active {
+      background: #004aad;
+    }
+
+    /* --- REQUIREMENTS SECTION --- */
+    .requirements {
+      max-width: 850px;
+      margin: 0 auto;
+      text-align: left;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .requirements ul {
+      margin-left: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .requirements h3 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    /* --- APPLY BUTTON --- */
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #004aad;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #00327a;
+    }
+
+    /* --- STEPS SECTION --- */
+    .steps {
+      background: #fff;
+      max-width: 850px;
+      margin: 2rem auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .steps ol {
+      margin-left: 1.5rem;
+      line-height: 1.8;
+    }
+
+    /* --- STRAND CTA --- */
+    .strand-cta {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: #e6f0ff;
+      margin-top: 2rem;
+    }
+
+    /* --- FAQ SECTION --- */
+    .faq {
+      max-width: 850px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item h4 {
+      margin: 0;
+      cursor: pointer;
+      color: #004aad;
+    }
+
+    .faq-item p {
+      display: none;
+      margin: 0.5rem 0 0;
+    }
+
+    /* --- CONTACT SECTION --- */
+    .contact {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #004aad;
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+<header class="container">
+    <nav>
+        <div class="logo">
+            <a href="#">
+            <img src="../../images/logo.png" alt="">
+            <p><span class="text">Senior High School</span><br>Southville 8B</p>
+            </a>
+        </div>
+
+        <!-- Hamburger -->
+        <div class="menu-toggle" id="menu-toggle">☰</div>
+
+        <!-- Navigation Links inside nav so it shares row with logo -->
+            <ul id="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/aboutus">About Us</a></li>
+            <li><a href="/admission">Admission</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Admission & Enrollment Guide</h1>
+    <p>Select your admission type to view requirements.</p>
+  </section>
+
+  <!-- CATEGORY BUTTONS -->
+  <section class="category-section">
+    <div class="category-buttons">
+      <button id="newEnrollee" class="active" data-type="new">New Enrollee</button>
+      <button id="transferee" data-type="transferee">Transferee</button>
+      <button id="returnee" data-type="returnee">Returnee</button>
+    </div>
+  </section>
+
+  <!-- REQUIREMENTS -->
+  <section class="requirements" id="requirements"></section>
+
+  <!-- STEPS -->
+  <section class="steps">
+    <h2>🧭 How to Apply</h2>
+    <ol>
+      <li>Choose your applicant type and review the requirements.</li>
+      <li>Prepare scanned copies of your documents.</li>
+      <li>Take the Strand Recommendation Assessment (optional but encouraged).</li>
+      <li>Click “Apply Online” to start your registration.</li>
+      <li>Wait for confirmation from the Registrar’s Office via email or SMS.</li>
+    </ol>
+  </section>
+
+  <!-- STRAND CTA -->
+  <section class="strand-cta">
+    <h2>🎯 Not sure which strand fits you best?</h2>
+    <p>Take our quick Strand Recommendation Assessment to find your ideal path!</p>
+    <a href="/assessment" class="btn" target="_blank" rel="noopener noreferrer">Take the Assessment</a>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <h2>💬 Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <h4>When is the enrollment period?</h4>
+      <p>Enrollment for A.Y. 2025–2026 runs from March 1 to June 15, 2025.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Is there an entrance exam?</h4>
+      <p>No entrance exam is required. However, all applicants must attend orientation and strand interviews.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Can I apply without a Good Moral Certificate?</h4>
+      <p>Yes, you may submit it later. Please coordinate with our Admission Office for special cases.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>Can I change my chosen strand after applying?</h4>
+      <p>Strand changes are allowed only during the orientation period, subject to availability.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <h2>📞 Need Help?</h2>
+    <p>Contact our Admission Office:</p>
+    <p>Email: admissions@southville8b.edu.ph</p>
+    <p>Phone: (02) 8123-4567</p>
+    <p>Facebook: <a href="#" style="color: #fff; text-decoration: underline;">fb.com/Southville8BSHS</a></p>
+  </section>
+
+  <script>
+    // === DYNAMIC REQUIREMENTS ===
+    const requirementsData = {
+      new: {
+        title: "Requirements for New Enrollees",
+        list: [
+          "Form 138 (Report Card)",
+          "Certificate of Good Moral Character",
+          "PSA Birth Certificate",
+          "2x2 ID Picture (2 pcs)",
+          "Completed Online Application Form",
+        ]
+      },
+      transferee: {
+        title: "Requirements for Transferees",
+        list: [
+          "Form 138 (Report Card)",
+          "Certificate of Good Moral Character",
+          "PSA Birth Certificate",
+          "Certificate of Transfer / Honorable Dismissal",
+          "Latest Curriculum Grades",
+        ]
+      },
+      returnee: {
+        title: "Requirements for Returnees",
+        list: [
+          "Previous SVSHS Report Card (Form 138)",
+          "Letter of Intent for Re-Enrollment",
+          "Updated Contact Information Form",
+          "PSA Birth Certificate",
+        ]
+      }
+    };
+
+    const reqContainer = document.getElementById("requirements");
+    const buttons = document.querySelectorAll(".category-buttons button");
+
+    function loadRequirements(type) {
+      const data = requirementsData[type];
+      reqContainer.innerHTML = `
+        <h3>${data.title}</h3>
+        <ul>${data.list.map(item => `<li>${item}</li>`).join('')}</ul>
+        <div style="text-align:center; margin-top:1.5rem;">
+          <a href="http://localhost:3000" class="btn">Apply Online</a>
+        </div>
+      `;
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        loadRequirements(btn.dataset.type);
+      });
+    });
+
+    loadRequirements("new");
+
+    // === FAQ TOGGLE ===
+    document.querySelectorAll(".faq-item h4").forEach(q => {
+      q.addEventListener("click", () => {
+        const answer = q.nextElementSibling;
+        answer.style.display = answer.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
+</body>
+</html>

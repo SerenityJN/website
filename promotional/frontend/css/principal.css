@@ -1,0 +1,215 @@
+/* General Page Styles */
+.principal-page {
+    padding: 50px 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.principal-page h1 {
+    color: #1a237e;
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.breadcrumb {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Principal Overview Section */
+.principal-overview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 40px;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.principal-overview:hover {
+    transform: translateY(-5px);
+}
+
+.principal-photo {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 4px solid #1a237e;
+    transition: transform 0.3s ease;
+}
+
+.principal-photo:hover {
+    transform: scale(1.05);
+}
+
+.principal-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.principal-info h2 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    color: #0d47a1;
+}
+
+.principal-info p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Links Section */
+.principal-links ul {
+    list-style: disc inside;
+    margin-bottom: 30px;
+    padding-left: 20px;
+}
+
+.principal-links ul li a {
+    text-decoration: none;
+    color: #1a237e;
+    transition: color 0.2s;
+}
+
+.principal-links ul li a:hover {
+    text-decoration: underline;
+    color: #0d47a1;
+}
+
+/* Council Members Section */
+.council-members h3 {
+    color: #0d47a1;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.council-members ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.council-members ul > li {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.council-members ul > li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+}
+
+.council-members ul ul {
+    list-style: circle;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.council-members ul ul li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Timeline for Education Journey (Optional Extra) */
+.education-journey {
+    margin-top: 50px;
+    padding: 30px 20px;
+    border-radius: 15px;
+    background-color: #e3f2fd;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.education-journey h3 {
+    color: #1a237e;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 40px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 18px;
+    width: 4px;
+    height: 100%;
+    background-color: #1a237e;
+    border-radius: 2px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 10px;
+    width: 14px;
+    height: 14px;
+    background-color: #1a237e;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+}
+
+.timeline-item .year {
+    font-weight: bold;
+    color: #0d47a1;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.timeline-item p {
+    margin: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .principal-overview {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .principal-photo {
+        margin-bottom: 20px;
+    }
+
+    .principal-info {
+        text-align: center;
+    }
+
+    .education-journey {
+        padding: 25px 15px;
+    }
+
+    .timeline {
+        padding-left: 25px;
+    }
+}

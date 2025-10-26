@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step-by-Step Registration</title>
+  <style>
+    :root{
+      --bg:#f7f7fb;
+      --card:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --primary:#2563eb; /* change to your brand color */
+      --primary-weak:#dbeafe;
+      --ok:#16a34a;
+      --danger:#dc2626;
+      --ring: 0 0 0 4px rgba(37,99,235,.15);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text); background:var(--bg);
+    }
+    .container{
+      max-width: 980px; margin: 40px auto; padding: 24px;
+    }
+    .card{
+      background:var(--card); border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.06);
+      overflow:hidden;
+    }
+    .header{
+      padding:24px; border-bottom:1px solid #eee; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .title{font-size:clamp(20px, 2.4vw, 28px); margin:0;}
+    .subtitle{color:var(--muted); margin:4px 0 0; font-size:14px}
+
+    /* Stepper */
+    .stepper{ display:flex; align-items:center; gap:12px; flex-wrap:wrap }
+    .step{ display:flex; align-items:center; gap:10px; }
+    .dot{
+      width:34px; height:34px; border-radius:50%; display:grid; place-items:center;
+      background:var(--primary-weak); color:var(--primary); font-weight:700;
+    }
+    .step.active .dot{ background:var(--primary); color:white }
+    .line{ height:2px; width:40px; background:#e5e7eb }
+    .step.complete .dot{ background:var(--ok); color:white }
+
+    form{ padding:24px; }
+
+    /* Form layout */
+    .form-step{ display:none; }
+    .form-step.active{ display:block; }
+
+    .grid{ display:grid; gap:16px; }
+    @media (min-width: 800px){
+      .grid-2{ grid-template-columns: 1fr 1fr }
+    }
+
+    label{ font-size:14px; color:var(--muted); display:block; margin:4px 0 6px }
+    input, select, textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid #e5e7eb; background:white;
+      font-size:16px; outline:none; transition:.2s ease border-color, .2s ease box-shadow;
+    }
+    input:focus, select:focus, textarea:focus{ border-color:var(--primary); box-shadow: var(--ring) }
+
+    .hint{ font-size:12px; color:var(--muted); margin-top:6px }
+
+    .error{ color:var(--danger); font-size:12px; margin-top:6px; display:none }
+    .invalid input, .invalid select, .invalid textarea{ border-color:var(--danger) }
+    .invalid .error{ display:block }
+
+    .row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between; margin-top:24px }
+    .btn{
+      appearance:none; border:0; background:var(--primary); color:white; padding:12px 16px; border-radius:12px; font-weight:700; cursor:pointer;
+      transition: transform .08s ease, box-shadow .2s ease; box-shadow:0 6px 14px rgba(37,99,235,.25);
+    }
+    .btn:hover{ transform: translateY(-1px) }
+    .btn:active{ transform: translateY(0) }
+    .btn.secondary{ background:#eef2ff; color:#4338ca; box-shadow:none }
+    .btn.ghost{ background:transparent; color:var(--muted); box-shadow:none }
+    .btn[disabled]{ opacity:.6; cursor:not-allowed }
+
+    .pw-meter{ height:8px; background:#e5e7eb; border-radius:999px; overflow:hidden }
+    .pw-meter > i{ display:block; height:100%; width:0%; background:var(--danger); transition: width .25s ease, background .25s ease }
+
+    .review{
+      background:#f9fafb; border:1px solid #eee; border-radius:12px; padding:16px; display:grid; gap:12px
+    }
+    .review .pair{ display:grid; grid-template-columns: 160px 1fr; gap:12px }
+    @media (max-width: 600px){ .review .pair{ grid-template-columns: 1fr } }
+
+    .success{
+      padding:36px; text-align:center
+    }
+    .success h2{ margin:0 0 8px }
+    .success p{ color:var(--muted); margin:0 0 12px }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <div>
+          <h1 class="title">Student Registration</h1>
+          <p class="subtitle">Complete the steps below to create your account and choose your strand.</p>
+        </div>
+        <div class="stepper" id="stepper">
+          <div class="step active"><div class="dot">1</div><span>Account</span></div>
+          <div class="line"></div>
+          <div class="step"><div class="dot">2</div><span>Personal</span></div>
+          <div class="line"></div>
+          <div class="step"><div class="dot">3</div><span>Academic</span></div>
+          <div class="line"></div>
+          <div class="step"><div class="dot">4</div><span>Review</span></div>
+        </div>
+      </div>
+
+      <form id="regForm" novalidate>
+        <!-- STEP 1: ACCOUNT -->
+        <section class="form-step active" data-step="0">
+          <div class="grid grid-2">
+            <div class="field" id="f-email">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required />
+              <div class="error">Please enter a valid email address.</div>
+            </div>
+            <div class="field" id="f-phone">
+              <label for="phone">Mobile Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="09XXXXXXXXX" pattern="^0\d{10}$" required />
+              <div class="hint">Format: 11 digits, starts with 0 (e.g., 09123456789)</div>
+              <div class="error">Enter a valid 11-digit PH number.</div>
+            </div>
+            <div class="field" id="f-password">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" minlength="8" autocomplete="new-password" required />
+              <div class="pw-meter" aria-hidden="true"><i id="pwBar"></i></div>
+              <div class="hint">At least 8 chars, include letters & numbers.</div>
+              <div class="error">Password isn't strong enough.</div>
+            </div>
+            <div class="field" id="f-confirm">
+              <label for="confirm">Confirm Password</label>
+              <input type="password" id="confirm" name="confirm" minlength="8" required />
+              <div class="error">Passwords do not match.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 2: PERSONAL -->
+        <section class="form-step" data-step="1">
+          <div class="grid grid-2">
+            <div class="field" id="f-first">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" required />
+              <div class="error">Please enter your first name.</div>
+            </div>
+            <div class="field" id="f-last">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" required />
+              <div class="error">Please enter your last name.</div>
+            </div>
+            <div class="field" id="f-bday">
+              <label for="birthday">Birthday</label>
+              <input type="date" id="birthday" name="birthday" required />
+              <div class="error">Please choose your birthday.</div>
+            </div>
+            <div class="field" id="f-gender">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" required>
+                <option value="" disabled selected>Select…</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Prefer not to say</option>
+              </select>
+              <div class="error">Please select a value.</div>
+            </div>
+            <div class="field" id="f-address" style="grid-column:1/-1;">
+              <label for="address">Address</label>
+              <input type="text" id="address" name="address" placeholder="House No., Street, Barangay, City" required />
+              <div class="error">Please enter your address.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 3: ACADEMIC -->
+        <section class="form-step" data-step="2">
+          <div class="grid grid-2">
+            <div class="field" id="f-strand">
+              <label for="strand">Preferred Strand</label>
+              <select id="strand" name="strand" required>
+                <option value="" disabled selected>Select a strand…</option>
+                <option value="STEM">STEM</option>
+                <option value="ABM">ABM</option>
+                <option value="HUMSS">HUMSS</option>
+                <option value="GAS">GAS</option>
+                <option value="TVL">TVL</option>
+                <option value="Arts & Design">Arts & Design</option>
+              </select>
+              <div class="error">Please select a strand.</div>
+            </div>
+            <div class="field" id="f-grade">
+              <label for="gradeLevel">Grade Level</label>
+              <select id="gradeLevel" name="gradeLevel" required>
+                <option value="" disabled selected>Select…</option>
+                <option>Grade 11</option>
+                <option>Grade 12</option>
+              </select>
+              <div class="error">Please choose a grade level.</div>
+            </div>
+            <div class="field" id="f-school">
+              <label for="prevSchool">Previous School (optional)</label>
+              <input type="text" id="prevSchool" name="prevSchool" placeholder="e.g., ABC High School" />
+            </div>
+            <div class="field" id="f-sched">
+              <label for="schedule">Preferred Schedule</label>
+              <select id="schedule" name="schedule" required>
+                <option value="" disabled selected>Select…</option>
+                <option>Morning (7:00–12:00)</option>
+                <option>Afternoon (12:30–5:30)</option>
+              </select>
+              <div class="error">Please choose a schedule.</div>
+            </div>
+            <div class="field" id="f-consent" style="grid-column:1/-1;">
+              <label style="display:flex; align-items:flex-start; gap:10px">
+                <input type="checkbox" id="terms" required />
+                <span>I certify that the information provided is true and I agree to the school's Terms & Privacy Policy.</span>
+              </label>
+              <div class="error">You must agree to continue.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEP 4: REVIEW -->
+        <section class="form-step" data-step="3">
+          <div class="review" id="review"></div>
+        </section>
+
+        <!-- Actions -->
+        <div class="row">
+          <button type="button" class="btn secondary" id="btnPrev">Back</button>
+          <div style="display:flex; gap:12px; align-items:center">
+            <button type="button" class="btn ghost" id="btnSave">Save Draft</button>
+            <button type="button" class="btn" id="btnNext">Next</button>
+            <button type="submit" class="btn" id="btnSubmit" style="display:none">Submit</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="success" id="success" style="display:none">
+        <h2>✅ Registration Complete</h2>
+        <p>Thank you! We've received your application.</p>
+        <button class="btn" id="btnNew">Register another student</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const regForm = document.getElementById('regForm');
+    const steps = Array.from(document.querySelectorAll('.form-step'));
+    const stepper = document.getElementById('stepper');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const btnSave = document.getElementById('btnSave');
+    const btnNew = document.getElementById('btnNew');
+    const reviewBox = document.getElementById('review');
+    const success = document.getElementById('success');
+
+    let current = 0;
+
+    function updateStepper(){
+      const nodes = Array.from(stepper.querySelectorAll('.step'));
+      nodes.forEach((node, idx)=>{
+        node.classList.toggle('active', idx === current);
+        node.classList.toggle('complete', idx < current);
+      });
+    }
+
+    function showStep(i){
+      current = Math.max(0, Math.min(i, steps.length-1));
+      steps.forEach((s, idx)=> s.classList.toggle('active', idx === current));
+      btnPrev.style.visibility = current === 0 ? 'hidden' : 'visible';
+      btnNext.style.display = current === steps.length-1 ? 'none' : 'inline-flex';
+      btnSubmit.style.display = current === steps.length-1 ? 'inline-flex' : 'none';
+      updateStepper();
+      if(current === steps.length-1){ fillReview(); }
+    }
+
+    function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    function pwScore(v){
+      let score = 0; if(v.length >= 8) score++; if(/[A-Za-z]/.test(v)) score++; if(/\d/.test(v)) score++; if(/[^\w]/.test(v)) score++;
+      return Math.min(score, 4);
+    }
+
+    // live password meter
+    const pw = document.getElementById('password');
+    const pwBar = document.getElementById('pwBar');
+    pw.addEventListener('input', ()=>{
+      const s = pwScore(pw.value);
+      const pct = [0, 25, 50, 75, 100][s];
+      pwBar.style.width = pct + '%';
+      pwBar.style.background = s >= 3 ? 'var(--ok)' : 'var(--danger)';
+    });
+
+    function setInvalid(id, cond){
+      const el = document.getElementById(id);
+      el.classList.toggle('invalid', cond);
+      return !cond;
+    }
+
+    function validateStep(idx){
+      let ok = true;
+      if(idx === 0){
+        ok &= setInvalid('f-email', !isEmail(document.getElementById('email').value.trim()));
+        ok &= setInvalid('f-phone', !/^0\d{10}$/.test(document.getElementById('phone').value.trim()));
+        const p = document.getElementById('password').value;
+        const c = document.getElementById('confirm').value;
+        ok &= setInvalid('f-password', pwScore(p) < 3);
+        ok &= setInvalid('f-confirm', p !== c || c.length === 0);
+      }
+      if(idx === 1){
+        ok &= setInvalid('f-first', document.getElementById('firstName').value.trim() === '');
+        ok &= setInvalid('f-last', document.getElementById('lastName').value.trim() === '');
+        ok &= setInvalid('f-bday', document.getElementById('birthday').value === '');
+        ok &= setInvalid('f-gender', document.getElementById('gender').value === '');
+        ok &= setInvalid('f-address', document.getElementById('address').value.trim() === '');
+      }
+      if(idx === 2){
+        ok &= setInvalid('f-strand', document.getElementById('strand').value === '');
+        ok &= setInvalid('f-grade', document.getElementById('gradeLevel').value === '');
+        ok &= setInvalid('f-sched', document.getElementById('schedule').value === '');
+        ok &= setInvalid('f-consent', !document.getElementById('terms').checked);
+      }
+      return !!ok;
+    }
+
+    function formDataObj(){
+      const fd = new FormData(regForm);
+      const o = Object.fromEntries(fd.entries());
+      // include checkbox manually (FormData skips unchecked)
+      o.terms = document.getElementById('terms').checked;
+      return o;
+    }
+
+    function fillReview(){
+      const d = formDataObj();
+      const safe = (v)=> (v && String(v).trim() !== '' ? String(v) : '—');
+      reviewBox.innerHTML = `
+        <div class="pair"><strong>Email</strong><span>${safe(d.email)}</span></div>
+        <div class="pair"><strong>Mobile</strong><span>${safe(d.phone)}</span></div>
+        <div class="pair"><strong>Name</strong><span>${safe(d.firstName)} ${safe(d.lastName)}</span></div>
+        <div class="pair"><strong>Birthday</strong><span>${safe(d.birthday)}</span></div>
+        <div class="pair"><strong>Gender</strong><span>${safe(d.gender)}</span></div>
+        <div class="pair"><strong>Address</strong><span>${safe(d.address)}</span></div>
+        <div class="pair"><strong>Strand</strong><span>${safe(d.strand)}</span></div>
+        <div class="pair"><strong>Grade Level</strong><span>${safe(d.gradeLevel)}</span></div>
+        <div class="pair"><strong>Previous School</strong><span>${safe(d.prevSchool)}</span></div>
+        <div class="pair"><strong>Schedule</strong><span>${safe(d.schedule)}</span></div>
+      `;
+    }
+
+    btnPrev.addEventListener('click', ()=> showStep(current-1));
+    btnNext.addEventListener('click', ()=>{
+      if(validateStep(current)) showStep(current+1);
+    });
+
+    regForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if(!validateStep(current)) return;
+      const payload = formDataObj();
+      // TODO: Replace with your backend endpoint
+      console.log('Submitting payload →', payload);
+      regForm.style.display = 'none';
+      success.style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      localStorage.removeItem('regDraft');
+    });
+
+    btnNew.addEventListener('click', ()=>{
+      regForm.reset();
+      success.style.display = 'none';
+      regForm.style.display = 'block';
+      showStep(0);
+    });
+
+    // Save Draft / Restore
+    const DRAFT_KEY = 'regDraft';
+    btnSave.addEventListener('click', ()=>{
+      const d = formDataObj();
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+      btnSave.textContent = 'Saved';
+      setTimeout(()=> btnSave.textContent = 'Save Draft', 1200);
+    });
+    (function restore(){
+      try{
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if(!raw) return;
+        const d = JSON.parse(raw);
+        for(const [k,v] of Object.entries(d)){
+          const el = regForm.elements[k];
+          if(!el) continue;
+          if(el.type === 'checkbox') el.checked = !!v; else el.value = v;
+        }
+      }catch(err){ console.warn('Draft restore failed', err); }
+    })();
+
+    showStep(0);
+  </script>
+</body>
+</html>

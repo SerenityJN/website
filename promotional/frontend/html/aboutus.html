@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/alldesign.css">
+    <link rel="stylesheet" href="../css/aboutus.css">
+    <title>Document</title>
+</head>
+<body>
+    <header class="container">
+       <nav>
+            <div class="logo">
+                <a href="#">
+                <img src="../../images/logo.png" alt="">
+                <p><span class="text">Senior High School</span><br>Southville 8B</p>
+                </a>
+            </div>
+
+            <!-- Hamburger -->
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+
+            <!-- Navigation Links inside nav so it shares row with logo -->
+             <ul id="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/aboutus">About Us</a></li>
+                <li><a href="/admission">Admission</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+        <main>
+            <header class="hero-section">
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <div class="line"></div>
+                    <h1>Welcome to Senior High</h1>
+                </div>
+            </header>
+
+            <section class="main-content reveal">
+                <h1>About Us</h1>
+                <p>
+                Our school is committed to providing quality education that nurtures both academic excellence 
+                and personal growth. We believe in shaping well-rounded individuals who are prepared to face 
+                the challenges of the modern world with confidence, compassion, and integrity.
+                </p>
+                <p>
+                With dedicated teachers, modern facilities, and a supportive community, we aim to create a 
+                safe and inspiring environment for every learner. Our programs focus not only on academic 
+                knowledge but also on values formation, leadership skills, and lifelong learning.
+                </p>
+                <p>
+                Together, we strive to empower our students to reach their fullest potential and to become 
+                responsible citizens who contribute positively to society.
+                </p>
+            </section>
+
+            <!-- Mission & Vision -->
+            <section class="mission-vision reveal">
+                <div class="box">
+                <h2>Mission</h2>
+                <p>
+                    To provide holistic education that fosters academic excellence, values formation, 
+                    and personal growth in a nurturing and supportive environment.
+                </p>
+                </div>
+                <div class="box">
+                <h2>Vision</h2>
+                <p>
+                    To be a leading institution recognized for producing globally competitive, 
+                    compassionate, and responsible individuals who contribute positively to society.
+                </p>
+                </div>
+            </section>
+
+            <section class="meet-our-team reveal">
+                <h2 style="text-align: center; margin-bottom: 2rem;">Meet Our Team</h2>
+                <div class="team-container">
+                    <div class="team-member">
+                        <img src="../../images/img1.jpg" alt="Team Member 1">
+                    </div>
+                    <div class="team-member">
+                        <img src="../../images/img2.jpg" alt="Team Member 2">
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+
+
+        <footer>
+           <div class="footer-content">
+              <p>&copy; 2025 Southville 8B | All Rights Reserved | Contact: info@southville8b.edu.ph</p>
+              <p>Follow us: <a href="">Facebook</a> | <a href="">Instagram</a> | <a href="">Twitter</a></p>
+            </div>
+        </footer>
+
+
+
+
+
+    <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    toggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    // Submenu toggle on mobile
+    const submenuParents = document.querySelectorAll("#nav-links li > a");
+
+    submenuParents.forEach(link => {
+      link.addEventListener("click", e => {
+        if (window.innerWidth <= 768 && link.nextElementSibling) {
+          e.preventDefault(); // prevent navigation
+          link.parentElement.classList.toggle("show");
+        }
+      });
+    });
+
+    // Scroll reveal animation
+    document.addEventListener("DOMContentLoaded", function () {
+      const reveals = document.querySelectorAll(".reveal");
+
+      function revealOnScroll() {
+        reveals.forEach(section => {
+          const sectionTop = section.getBoundingClientRect().top;
+          const triggerPoint = window.innerHeight * 0.85;
+
+          if (sectionTop < triggerPoint) {
+            section.classList.add("show");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", revealOnScroll);
+      revealOnScroll(); // run once for already visible sections
+    });
+  </script>
+
+
+
+</body>
+</html>
