@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2nd Semester Enrollment - SVSHS</title>
+    
+    <style>
+      /* Keep all your CSS styles */
+      /* ... existing CSS ... */
+      
+      .simplified-form {
+          text-align: left;
+      }
+      
+      .info-note {
+          background: #f0f9ff;
+          border: 1px solid #0ea5e9;
+          border-radius: 10px;
+          padding: 20px;
+          margin-bottom: 25px;
+      }
+      
+      .info-note h4 {
+          color: #0369a1;
+          margin-bottom: 10px;
+      }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-text">SVSHS 2nd Semester Enrollment</div>
+        <nav>
+            <ul>
+                <li><button class="nav-btn" onclick="window.location.href='index.html'">1st Semester</button></li>
+                <li><button class="nav-btn active">2nd Semester</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>2nd Semester <span>Enrollment</span></h1>
+            <p>Continue your education journey with Southville 8B Senior High School</p>
+            <div class="continuing-student-badge">For Grade 11 Continuing Students</div>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <div class="form-container">
+            <h1>2nd Semester Enrollment Form</h1>
+            <p class="subtitle">Complete this form to enroll for the 2nd Semester SY 2024-2025</p>
+            
+            <div class="info-note">
+                <h4>📋 Important Information</h4>
+                <p>This form is for students who completed 1st Semester at SVSHS and wish to continue to 2nd Semester.</p>
+                <p><strong>Note:</strong> Your enrollment will be verified manually by the registrar.</p>
+            </div>
+
+            <form id="secondSemesterForm" class="simplified-form" action="#" method="POST" novalidate>
+                <!-- Basic Student Information -->
+                <div class="form-step active">
+                    <h3>Student Information</h3>
+                    
+                    <div class="form-gridfour">
+                        <div class="form-group">
+                            <label>Learner Reference Number (LRN) *</label>
+                            <input type="text" name="lrn" placeholder="12-digit LRN" maxlength="12" pattern="\d{12}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>First Name *</label>
+                            <input type="text" name="firstname" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name *</label>
+                            <input type="text" name="lastname" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Middle Name</label>
+                            <input type="text" name="middlename">
+                        </div>
+                        <div class="form-group">
+                            <label>Current Strand *</label>
+                            <select name="current_strand" required>
+                                <option value="">-- Select Strand --</option>
+                                <option>TVL - EIM</option>
+                                <option>TVL - Automotive</option>
+                                <option>ACAD - HUMSS</option>
+                                <option>ACAD - STEM</option>
+                                <option>ACAD - ABM</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Grade Level *</label>
+                            <select name="grade_level" required>
+                                <option value="">-- Select --</option>
+                                <option value="11">Grade 11</option>
+                                <option value="12">Grade 12</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address *</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number *</label>
+                            <input type="tel" name="phone" placeholder="09XXXXXXXXX" pattern="09\d{9}" required>
+                        </div>
+                    </div>
+                    
+                    <h3 style="margin-top: 30px;">Grade Information</h3>
+                    
+                    <div class="form-gridthree">
+                        <div class="form-group">
+                            <label>1st Semester Average Grade *</label>
+                            <input type="number" name="average_grade" min="75" max="100" step="0.01" placeholder="e.g., 85.5" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Continue with same strand? *</label>
+                            <select name="same_strand" required>
+                                <option value="">-- Select --</option>
+                                <option value="yes">Yes, same strand</option>
+                                <option value="no">No, change strand</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Upload Report Card *</label>
+                            <input type="file" name="report_card" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+                    </div>
+                    
+                    <div id="strandChangeSection" style="display: none; margin-top: 20px;">
+                        <div class="form-gridtwo">
+                            <div class="form-group">
+                                <label>New Preferred Strand *</label>
+                                <select name="new_strand">
+                                    <option value="">-- Select New Strand --</option>
+                                    <option>TVL - EIM</option>
+                                    <option>TVL - Automotive</option>
+                                    <option>ACAD - HUMSS</option>
+                                    <option>ACAD - STEM</option>
+                                    <option>ACAD - ABM</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Reason for Strand Change *</label>
+                                <textarea name="strand_change_reason" rows="3" placeholder="Please explain why you want to change strands..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Additional Notes or Concerns</label>
+                        <textarea name="additional_notes" rows="3" placeholder="Any special requests, concerns, or additional information..."></textarea>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button type="button" onclick="window.location.href='index.html'" style="background: #e5e7eb; color: #1f2937;">Cancel</button>
+                    <button type="submit" style="background: #059669; color: white;">Submit 2nd Semester Enrollment</button>
+                </div>
+            </form>
+            
+            <div id="success-message" style="display: none;">
+                <div class="success">
+                    <h2>✅ Enrollment Submitted Successfully!</h2>
+                    <p>Your 2nd Semester enrollment has been received.</p>
+                    <p><strong>Reference Number:</strong> <span id="success-ref-id"></span></p>
+                    <p>The registrar will verify your 1st Semester completion and contact you if needed.</p>
+                    <div style="margin-top: 20px;">
+                        <button type="button" onclick="window.location.href='index.html'">Back to Home</button>
+                        <button type="button" onclick="window.print()" style="background: #6b7280; margin-left: 10px;">Print Confirmation</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const enrollmentForm = document.getElementById('secondSemesterForm');
+    const sameStrandSelect = document.querySelector('select[name="same_strand"]');
+    const strandChangeSection = document.getElementById('strandChangeSection');
+    
+    // Handle strand change selection
+    sameStrandSelect.addEventListener('change', function() {
+        if (this.value === 'no') {
+            strandChangeSection.style.display = 'block';
+            // Make strand change fields required
+            strandChangeSection.querySelector('select[name="new_strand"]').required = true;
+            strandChangeSection.querySelector('textarea[name="strand_change_reason"]').required = true;
+        } else {
+            strandChangeSection.style.display = 'none';
+            // Remove required attribute
+            strandChangeSection.querySelector('select[name="new_strand"]').required = false;
+            strandChangeSection.querySelector('textarea[name="strand_change_reason"]').required = false;
+        }
+    });
+    
+    // Form submission
+    enrollmentForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        try {
+            // Show loading state
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(this);
+            formData.append('semester', '2nd');
+            formData.append('enrollment_type', 'Continuing');
+            formData.append('enrollment_status', 'Under Review');
+            
+            // Submit to your backend
+            const response = await submitEnrollment(formData);
+            
+            if (response.success) {
+                // Show success message
+                document.getElementById('success-ref-id').textContent = response.referenceId;
+                enrollmentForm.style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+            } else {
+                throw new Error(response.message || 'Submission failed');
+            }
+            
+        } catch (error) {
+            alert('Error submitting enrollment: ' + error.message);
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
+    });
+    
+    async function submitEnrollment(formData) {
+        // Replace this with your actual API endpoint
+        const response = await fetch('/api/enroll/second-semester', {
+            method: 'POST',
+            body: formData
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network error');
+        }
+        
+        return await response.json();
+    }
+    
+    // Input validation
+    const gradeInput = document.querySelector('input[name="average_grade"]');
+    gradeInput.addEventListener('input', function() {
+        const grade = parseFloat(this.value);
+        if (grade < 75) {
+            this.setCustomValidity('Grade must be at least 75.0');
+        } else if (grade > 100) {
+            this.setCustomValidity('Grade cannot exceed 100.0');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+    
+    // LRN validation
+    const lrnInput = document.querySelector('input[name="lrn"]');
+    lrnInput.addEventListener('input', function() {
+        if (this.value.length !== 12 && this.value.length > 0) {
+            this.setCustomValidity('LRN must be exactly 12 digits');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+});
+    </script>
+</body>
+</html>

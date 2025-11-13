@@ -8,6 +8,8 @@
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 main {
@@ -148,24 +150,6 @@ nav {
 
 
 
-
-
-/* --- FOOTER --- */
-footer {
-  background: white;
-  color: black;
-  padding: 2rem 1rem;
-  text-align: center;
-}
-
-.footer-content p {
-  margin: 0.5rem 0;
-  font-size: 0.95rem;
-}
-
-.footer-content a {
-    color: black;
-}
 
 
 

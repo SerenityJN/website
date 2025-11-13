@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Southville 8B SHS</title>
+  <link rel="stylesheet" href="../css/contact.css" />
+  <link rel="stylesheet" href="../css/alldesign.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2e0b9e4a8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="container">
+    <nav>
+      <div class="logo">
+        <a href="#">
+          <img src="images/logo.png" alt="">
+          <p><span class="text">Southville 8B</span><br>Senior High School</p>
+        </a>
+      </div>
+
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="aboutus.html">About Us</a></li>
+        <li><a href="admission.html">Admission</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero-section">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1>Get In Touch</h1>
+        <p class="hero-subtitle">We're here to help with any questions about our programs, admission process, or campus life.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+      <div class="contact-container">
+        <!-- LEFT SIDE -->
+        <div class="contact-info">
+            <div class="section-header">
+                <h2>Connect With Us</h2>
+                <p>Choose the most convenient way to reach out</p>
+            </div>
+
+            <div class="contact-cards">
+                <div class="contact-card">
+                <div class="card-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>Call Us</h3>
+                <div class="contact-details">
+                    <p>(02) 85511982</p>
+                </div>
+                </div>
+                
+                <div class="contact-card">
+                <div class="card-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>Email Us</h3>
+                <div class="contact-details">
+                    <p>342567@deped.gov.ph</p>
+                </div>
+                </div>
+                
+                <div class="contact-card">
+                <div class="card-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Visit Us</h3>
+                <div class="contact-details">
+                    <p>Southville 8B Senior High School<br>Laylayan Phase 4 San Isidro<br>Montalban, Rizal, Philippines</p>
+                </div>
+                </div>
+                
+                <div class="contact-card">
+                <div class="card-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>Social Media</h3>
+                <p>Follow us for updates and campus news</p>
+                <div class="social-links">
+                    <a href="https://facebook.com/svshs" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/svshs" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="contact-form">
+            <div class="section-header">
+                <h2>Send Us a Message</h2>
+                <p>Fill out the form below and we'll get back to you as soon as possible</p>
+            </div>
+           <div class="form-container">
+                <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                    <i class="fas fa-user input-icon"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                    <i class="fas fa-envelope input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                    <label for="phone">Contact Number *</label>
+                    <input type="tel" id="phone" name="phone" placeholder="09XX XXX XXXX" required>
+                    <i class="fas fa-phone input-icon"></i>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="" disabled selected>Select a subject</option>
+                        <option value="admission">Admission Inquiry</option>
+                        <option value="academics">Academic Programs</option>
+                        <option value="scholarship">Scholarship</option>
+                        <option value="facilities">Campus Facilities</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <i class="fas fa-chevron-down input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="form-group full-width">
+                    <label for="message">Message / Feedback *</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Please provide details about your inquiry..." required></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">
+                    <span class="btn-text">Send Message</span>
+                    <i class="fas fa-paper-plane btn-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="form-success" id="successMessage" style="display:none;">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                    <h3>Message Sent Successfully!</h3>
+                    <p>Thank you for contacting us. We'll get back to you within 24 hours.</p>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ (optional, for same page integration) -->
+    <section class="faq-section">
+      <div class="section-header">
+        <h2>Frequently Asked Questions</h2>
+        <p>Quick answers to common questions</p>
+      </div>
+      
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What are the admission requirements?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Admission requirements include a completed application form, Form 138 (Report Card), two 2x2 ID photos, and a certificate of good moral character. Please visit our Admissions page for complete details.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>What academic tracks do you offer?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>We offer four academic tracks: Academic Track (ABM, HUMSS, STEM), Technical-Vocational-Livelihood Track, Sports Track, and Arts and Design Track.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question">
+            <h3>Do you offer scholarships?</h3>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            <p>Yes, we offer various scholarship programs for academically excellent students, athletes, and those with financial needs. Contact our admissions office for eligibility requirements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About Our Institution</h3>
+                <p>We are committed to providing quality education and fostering academic excellence. Our institution has been serving students for over 50 years.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="quick-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Programs</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Tuition & Fees</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Campus Life</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact Information</h3>
+                <ul class="contact-info">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Education Avenue<br>Academic City, AC 12345</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>admissions@institution.edu</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>Mon - Fri: 8:00 AM - 5:00 PM</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Campus Location</h3>
+                <p>Visit our beautiful campus located in the heart of Academic City.</p>
+                <div class="campus-map">
+                    <!-- In a real implementation, this would be an embedded Google Map -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Academic Institution. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Accessibility</a>
+            </div>
+        </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Simple form handler
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const success = document.querySelector(".form-success");
+      success.style.display = "block";
+      this.reset();
+    });
+
+    // FAQ toggle
+   document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const answer = faqItem.querySelector('.faq-answer');
+        const icon = question.querySelector('i');
+        
+        // Toggle active class
+        faqItem.classList.toggle('active');
+        
+        // Toggle icon
+        if (faqItem.classList.contains('active')) {
+          icon.classList.remove('fa-chevron-down');
+          icon.classList.add('fa-chevron-up');
+        } else {
+          icon.classList.remove('fa-chevron-up');
+          icon.classList.add('fa-chevron-down');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

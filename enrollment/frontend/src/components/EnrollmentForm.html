@@ -1,332 +1,294 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SVSHS Online Application</title>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="../css/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVSHS Online Application</title>
+    
+    <style>
+      @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+      * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+      body { color: #111; background: #f3f4f6; overflow-x: hidden; }
+      header { position: fixed; top: 0; left: 0; width: 100%; height: 70px; display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); padding: 0 50px; z-index: 1000; }
+      .logo-text { font-size: 1.3rem; font-weight: bold; color: #16a34a; }
+      nav ul { list-style: none; display: flex; align-items: center; gap: 25px; }
+      nav .nav-btn { text-decoration: none; color: #111; font-weight: 500; position: relative; transition: 0.3s ease; background: none; border: none; cursor: pointer; font-size: 1rem; font-family: "Poppins", sans-serif; }
+      nav .nav-btn:hover, nav .nav-btn.active { color: #2563eb; }
+      nav .nav-btn.active::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 100%; height: 2px; background: #2563eb; }
+      .hero-section { position: relative; height: 90vh; display: flex; align-items: center; justify-content: flex-start; background: url("https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop") center/cover no-repeat; color: white; padding-left: 10%; }
+      .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1; }
+      .hero-content { position: relative; z-index: 2; max-width: 550px; }
+      .hero-content h1 { font-size: 2.8rem; font-weight: 700; margin-bottom: 10px; line-height: 1.2; }
+      .hero-content h1 span { color: #60a5fa; }
+      .hero-content p { font-size: 1.1rem; color: #e0e7ff; margin-bottom: 25px; }
+      .hero-content .apply-now { background: #2563eb; color: #fff; padding: 12px 28px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.3s ease; border: none; cursor: pointer; }
+      .hero-content .apply-now:hover { background: #1e3a8a; transform: translateY(-2px); }
+      .form-section { display: flex; justify-content: center; width: 100%; padding: 0 20px; margin-top: -80px; margin-bottom: 80px; position: relative; z-index: 3; opacity: 0; transform: translateY(50px); transition: all 0.8s ease-in-out; }
+      .form-section.visible { opacity: 1; transform: translateY(0); }
+      .form-container { background: #fff; padding: 40px; border-radius: 20px; width: 100%; max-width: 950px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1); text-align: center; }
+      .form-container h1 { font-size: 1.8rem; margin-bottom: 8px; }
+      .form-container .subtitle { color: #555; margin-bottom: 25px; font-size: 1rem; }
+      .button-status { display: flex; justify-content: center; gap: 1rem; margin-bottom: 30px; flex-wrap: wrap; }
+      .button-status .student-type-btn { background-color: #f3f4f6; color: #374151; border: 1px solid #e5e7eb; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: all 0.3s ease; }
+      .button-status .student-type-btn:hover { background-color: #e5e7eb; }
+      .button-status .student-type-btn.active { background-color: #2563eb; color: #fff; border-color: #2563eb; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25); }
+      .stepper { display: flex; justify-content: space-between; background: #f9fafb; padding: 20px; border-radius: 16px; margin-bottom: 30px; border: 1px solid #e5e7eb; }
+      .step { display: flex; flex-direction: column; align-items: center; position: relative; flex: 1; transition: all 0.4s ease; }
+      .step:not(:last-child)::after { content: ""; position: absolute; top: 22px; right: -50%; width: 100%; height: 4px; background: #e5e7eb; z-index: 0; transition: background-color 0.5s ease; }
+      .step.completed:not(:last-child)::after { background: #22c55e; }
+      .icon { width: 45px; height: 45px; border-radius: 50%; background: #e5e7eb; display: flex; justify-content: center; align-items: center; font-size: 18px; color: #9ca3af; margin-bottom: 8px; transition: all 0.4s ease; position: relative; z-index: 1; }
+      .step .icon .fa-check { color: #9ca3af; transition: color 0.3s; }
+      .step.completed .icon { background: #22c55e; color: #fff; }
+      .step.completed .icon .fa-check, .step.active .icon .fa-check { color: #fff; }
+      .step.active .icon { background: #2563eb; color: #fff; transform: scale(1.1); }
+      .step p { font-size: 0.85rem; font-weight: 500; color: #6b7280; text-align: center; }
+      .step.completed p, .step.active p { color: #111827; }
+      .form-step { text-align: left; animation: fadeIn 0.5s ease; display: none; }
+      .form-step.active { display: block; }
+      .form-step h3 { grid-column: 1 / -1; margin-bottom: 20px; font-size: 1.3rem; color: #111; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px; }
+      .form-group { margin-bottom: 20px; }
+      .form-group label { font-weight: 500; margin-bottom: 6px; display: block; color: #374151; }
+      .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 14px; font-size: 1rem; border: 1px solid #d1d5db; border-radius: 8px; background: #f9fafb; transition: all 0.25s ease; outline: none; }
+      .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #2563eb; background: #fff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+      .form-group select:disabled { background-color: #e9ecef; cursor: not-allowed; }
+      .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px 20px; }
+      .welcome-box { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 25px 35px; margin-bottom: 25px; }
+      .welcome-box h3 { font-weight: 600; margin-bottom: 15px; }
+      .welcome-box ul { margin-left: 20px; line-height: 1.7; }
+      .privacy-consent-box { background: #fefce8; border: 1px solid #fde047; border-left: 5px solid #facc15; border-radius: 10px; padding: 20px 25px; font-size: 0.95rem; }
+      .privacy-consent-box h4 { font-weight: 600; margin-bottom: 10px; }
+      .privacy-consent-box p { line-height: 1.6; margin-bottom: 15px; }
+      .consent-check { display: flex; align-items: center; gap: 10px; }
+      .consent-check input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+      .consent-check label { font-weight: 500; cursor: pointer; }
+      .buttons { display: flex; justify-content: space-between; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 20px; }
+      .buttons button { border: none; padding: 12px 28px; border-radius: 8px; font-size: 1rem; cursor: pointer; font-weight: 600; transition: 0.3s ease; }
+      #prevBtn { background: #e5e7eb; color: #1f2937; }
+      #prevBtn:hover { background: #d1d5db; }
+      #nextBtn { background: #2563eb; color: white; }
+      #nextBtn:hover { background: #1d4ed8; }
+      .buttons button:disabled { opacity: 0.6; cursor: not-allowed; }
+      .review-section { background: #f9fafb; border-radius: 10px; padding: 25px; border: 1px solid #e5e7eb; text-align: left; }
+      .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
+      .review-section p { margin-bottom: 8px; font-size: 1rem; word-break: break-word; }
+      .review-section p > strong { color: #6b7280; }
+      .review-section p > span { font-weight: 600; color: #1f2937; }
+      .success { text-align: center; padding: 40px; }
+      .success h2 { color: #16a34a; margin-bottom: 10px; }
+      .success button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 500; margin-top: 10px; transition: background-color 0.3s ease; }
+      .success button:hover { background: #1e40af; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 768px) {
+        header { padding: 0 20px; }
+        .hero-section { height: 70vh; text-align: center; justify-content: center; padding: 0 5%; }
+        .form-container { padding: 30px 25px; max-width: 100%; }
+        .stepper { flex-wrap: wrap; gap: 15px; }
+        .step { flex-basis: 30%; }
+        .step:not(:last-child)::after { display: none; }
+        .buttons { flex-direction: column-reverse; gap: 10px; }
+        .buttons button { width: 100%; }
+      }
+      @media (max-width: 480px) {
+        .hero-content h1 { font-size: 2rem; }
+        .form-container { padding: 25px 15px; }
+        .stepper { overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; padding-bottom: 15px; }
+        .step { flex: 0 0 100px; }
+        .form-grid { grid-template-columns: 1fr; }
+        .review-grid { grid-template-columns: 1fr; }
+      }
+    input[type="text"],
+    input[type="tel"],
+    input[type="number"],
+    textarea,
+    select {
+    text-transform: uppercase;
+    }
+
+    /* Keep email normal case (for valid format) */
+    input[type="email"] {
+    text-transform: none;
+    }
+
+    </style>
 </head>
-
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="logo-text">SVSHS Online Application</div>
-    <nav>
-      <ul>
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="#">Application</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <!-- HERO -->
-  <section class="hero-section">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>Welcome to <span>Southville 8B Senior High School</span></h1>
-      <p>SVSHS Senior High School Online Application Portal</p>
-      <a href="#apply">Apply Now →</a>
-    </div>
-  </section>
+    <header>
+        <div class="logo-text">SVSHS Online Application</div>
+        <nav>
+            <ul>
+                <li><button class="nav-btn active" data-target="home">Home</button></li>
+                <li><button class="nav-btn" data-target="apply">Application</button></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- FORM CONTAINER -->
-  <section id="apply" class="form-section">
-    <div class="form-container">
-      <h1>Student Registration</h1>
-      <p class="subtitle">Complete the steps below to create your account and choose your strand.</p>
-
-      <!-- STEPPER -->
-      <div class="stepper">
-        <div class="step active">
-          <div class="icon"><i class="fas fa-hand-sparkles"></i></div>
-          <p>Welcome</p>
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Welcome to <span>Southville 8B Senior High School</span></h1>
+            <p>SVSHS Senior High School Online Application Portal</p>
+            <button class="apply-now">Apply Now →</button>
         </div>
+    </section>
 
-        <div class="step pending">
-          <div class="icon"><i class="fas fa-user"></i></div>
-          <p>Application Account</p>
-        </div>
+    <section id="apply" class="form-section">
+        <div class="form-container">
+            <div id="form-content">
+                <h1>Student Registration</h1>
+                <p class="subtitle">Please select your status and complete the steps to enroll.</p>
+                <div class="button-status">
+                    <button class="student-type-btn active" data-type="New Enrollee">New Enrollee</button>
+                    <button class="student-type-btn" data-type="Transferee">Transferee</button>
+                    <button class="student-type-btn" data-type="Returnee">Returnee</button>
+                </div>
 
-        <div class="step pending">
-          <div class="icon"><i class="fas fa-id-card"></i></div>
-          <p>Application Profile</p>
-        </div>
+                <div class="stepper"></div>
 
-        <div class="step pending">
-          <div class="icon"><i class="fas fa-book"></i></div>
-          <p>Educational Profile</p>
-        </div>
+                <form id="regForm" action="#" method="POST" novalidate>
+                    <div class="form-step" data-step-index="0">
+                        <div class="welcome-box">
+                            <h3 id="welcome-title"></h3>
+                            <p>To proceed, please be ready with the following:</p>
+                            <div id="welcome-requirements"></div>
+                        </div>
+                        <div class="privacy-consent-box">
+                            <h4>Data Privacy Notice</h4>
+                            <p>By proceeding, you consent to the collection and processing of your personal data for legitimate school-related purposes, in accordance with the Data Privacy Act of 2012.</p>
+                            <div class="consent-check">
+                                <input type="checkbox" id="privacy-consent-checkbox" required>
+                                <label for="privacy-consent-checkbox">I have read and agree to the Data Privacy Notice.</label>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="step pending">
-          <div class="icon"><i class="fas fa-users"></i></div>
-          <p>Family Profile</p>
-        </div>
+                    <div class="applicant-steps" style="display: block;">
+                        <div class="form-step" data-step-index="1">
+                            <h3>Account Information</h3>
+                            <div class="form-group"><label>Email *</label><input type="email" name="email" required></div>
+                            <div class="form-group"><label>Mobile Number *</label><input type="tel" name="phone" placeholder="09XXXXXXXXX" maxlength="11" required></div>
+                        </div>
+                        <div class="form-step" data-step-index="2">
+                            <div class="form-grid">
+                                <h3 style="grid-column: 1 / -1;">Personal Profile</h3>
+                                <div class="form-group" style="grid-column: 1 / -1;"><label>Learner Reference Number (LRN) *</label><input type="text" name="lrn" required maxlength="12" pattern="\d{12}" title="LRN must be 12 digits."></div>
+                                <div class="form-group"><label>First Name *</label><input type="text" name="firstname" required></div>
+                                <div class="form-group"><label>Last Name *</label><input type="text" name="lastname" required></div>
+                                <div class="form-group"><label>Middle Name</label><input type="text" name="middlename"></div>
+                                <div class="form-group"><label>Suffix</label><select name="suffix"><option value="">N/A</option><option>Jr.</option><option>Sr.</option><option>I</option><option>II</option><option>III</option></select></div>
+                                <div class="form-group"><label>Birthday *</label><input type="date" name="birthdate" required></div>
+                                <div class="form-group"><label>Age *</label><input type="number" name="age" min="1" required></div>
+                                <div class="form-group"><label>Gender *</label><select name="sex" required><option value="">-- Select --</option><option>Male</option><option>Female</option><option>Rather not say</option></select></div>
+                                <div class="form-group"><label>Civil Status *</label><select name="status" required><option value="">-- Select --</option><option>Single</option><option>Married</option><option>Widowed</option></select></div>
+                                <div class="form-group"><label>Nationality *</label><input type="text" name="nationality" value="Filipino" required></div>
+                                <div class="form-group"><label>Religion *</label><input type="text" name="religion" required></div>
+                                <div class="form-group" style="grid-column: 1 / -1;"><label>Place of Birth (Province) *</label><select name="place_of_birth" required id="province-select"></select></div>
+                                <h3 style="grid-column: 1 / -1; margin-top: 1rem;">Address Information</h3>
+                                <div class="form-group"><label>Block/Lot/House No. *</label><input type="text" name="lot_blk" required></div>
+                                <div class="form-group"><label>Street *</label><input type="text" name="street" required></div>
+                                <div class="form-group"><label>Barangay *</label><input type="text" name="barangay" required></div>
+                                <div class="form-group"><label>Municipality/City *</label><input type="text" name="municipality" required></div>
+                                <div class="form-group"><label>Province *</label><input type="text" name="province" required></div>
+                                <div class="form-group"><label>ZIP Code *</label><input type="text" name="zipcode" required></div>
+                            </div>
+                        </div>
+                        <div class="form-step" data-step-index="3">
+                            <h3>Educational Background</h3>
+                            <div class="form-group"><label>Last School Attended *</label><input type="text" name="last_school" required></div>
+                            <div class="form-group"><label>Year Level to Enroll In *</label><select id="yearLevelSelect" name="yearLevel" required><option value="">-- Select --</option><option value="Grade 11">Grade 11</option><option value="Grade 12">Grade 12</option></select></div>
+                            <div class="form-group"><label>Preferred Strand *</label><select name="strand" required><option value="">-- Select --</option><option>TVL - EIM</option><option>TVL - Automotive</option><option>ACAD - HUMSS</option></select></div>
+                        </div>
+                        <div class="form-step" data-step-index="4">
+                            <h3>Guardian Information</h3>
+                            <div class="form-group"><label>Guardian's Full Name *</label><input type="text" name="guardian_name" required></div>
+                            <div class="form-group"><label>Guardian's Contact Number *</label><input type="tel" name="guardian_phone" placeholder="09XXXXXXXXX" maxlength="11" required></div>
+                        </div>
+                        <div class="form-step" data-step-index="5" id="applicant-uploads"></div>
+                    </div>
 
-        <div class="step pending">
-          <div class="icon"><i class="fas fa-upload"></i></div>
-          <p>Upload Requirements</p>
-        </div>
+                    <div class="returnee-steps" style="display: none;">
+                        <div class="form-step" data-step-index="1">
+                            <h3>Verify Your Identity</h3>
+                            <div class="form-group"><label>Learner Reference Number (LRN) *</label><input type="text" name="returnee_lrn" required maxlength="12" pattern="\d{12}" title="LRN must be 12 digits."></div>
+                            <div class="form-group"><label>Email Address Used Before *</label><input type="email" name="returnee_email" required></div>
+                            <div class="form-group"><label>Mobile Number *</label><input type="tel" name="returnee_phone" placeholder="09XXXXXXXXX" maxlength="11" required></div>
+                        </div>
+                        <div class="form-step" data-step-index="2">
+                            <h3>Readmission Form</h3>
+                            <div class="form-group"><label>Reason for Leaving *</label><textarea name="reason_leaving" rows="4" required placeholder="e.g., Transferred to another school, Family relocation, Stopped schooling, etc."></textarea></div>
+                            <div class="form-group"><label>Reason for Returning *</label><textarea name="reason_returning" rows="4" required placeholder="e.g., Moving back to the area, Decided to continue studies, etc."></textarea></div>
+                        </div>
+                    </div>
 
-        <div class="step pending">
-          <div class="icon"><i class="fas fa-check-circle"></i></div>
-          <p>Review</p>
-        </div>
-      </div>
+                    <div class="form-step" id="review-step">
+                      <h3>Review Your Information</h3><p>Double-check all details before submitting.</p>
+                      <div class="review-section">
+                        <div class="review-grid">
+                            <p><strong>Applying as:</strong> <span id="rev_student_type"></span></p>
+                            <p><strong>LRN:</strong> <span id="rev_lrn"></span></p>
+                            <p><strong>Full Name:</strong> <span id="rev_name"></span></p>
+                            <p><strong>Email:</strong> <span id="rev_email"></span></p>
+                            <p><strong>Contact #:</strong> <span id="rev_phone"></span></p>
+                            
+                            <div id="review-applicant-details" style="display: contents;">
+                                <p><strong>Birthday:</strong> <span id="rev_birthdate"></span></p>
+                                <p><strong>Age:</strong> <span id="rev_age"></span></p>
+                                <p><strong>Gender:</strong> <span id="rev_sex"></span></p>
+                                <p><strong>Status:</strong> <span id="rev_status"></span></p>
+                                <p><strong>Nationality:</strong> <span id="rev_nationality"></span></p>
+                                <p><strong>Religion:</strong> <span id="rev_religion"></span></p>
+                                <p><strong>Place of Birth:</strong> <span id="rev_pob"></span></p>
+                                <p style="grid-column: 1 / -1;"><strong>Address:</strong> <span id="rev_address"></span></p>
+                            </div>
 
-      <!-- WELCOME CONTENT -->
-     <div class="form-step active">
-        <div class="welcome-box">
-          <h3>Welcome to the SVSHS Online Application for Admission!</h3>
-          <p>To proceed with your application, please do the following:</p>
-          <ol>
-            <li>Be ready to upload your 2" x 2" photo with white background and any of the following:
-              <ul>
-                <li>For Grade 12 graduates: Grade 12 report card</li>
-                <li>For graduates of Non-Formal Education: PEPT/ALS rating</li>
-                <li>For current Grade 12 students: Grade 11 report card</li>
-                <li>For college transferees: Transcript of records or Certification of grades</li>
-                <li>For degree holders: Transcript of records</li>
-                <li>For cross-enrollees: Permit to cross-enroll</li>
-              </ul>
-            </li>
-            <li>Review all information you entered before clicking Submit.</li>
-            <li>Make sure to COPY/TAKE A SCREENSHOT of your reference number. You’ll use this later.</li>
-          </ol>
-        </div>
-      </div>
-
-            <!-- ✅ Registration Form -->
-      <form id="regForm" action="../php/register.php" method="POST" enctype="multipart/form-data">
-        
-        <!-- Step 1 -->
-        <div class="form-step">
-          <div class="form-group">
-            <label>Email *</label>
-            <input type="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label>Mobile Number *</label>
-            <input type="tel" name="phone" placeholder="09XXXXXXXXX" pattern="^0\d{10}$" maxlength="11" required>
-          </div>
-          <div class="form-group">
-            <label>Password *</label>
-            <input type="password" name="password" minlength="8" required>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="form-step">
-          <div class="form-grid">
-            <h3 style="grid-column: 1 / -1;">Student Information</h3>
-
-            <div class="form-group"><label>First Name *</label><input type="text" name="firstname" required></div>
-            <div class="form-group"><label>Last Name *</label><input type="text" name="lastname" required></div>
-            <div class="form-group"><label>Middle Name *</label><input type="text" name="middlename"></div>
-
-            <div class="form-group">
-              <label>Suffix *</label>
-              <select name="suffix">
-                <option value="">-- Select Suffix --</option>
-                <option>JR</option>
-                <option>SR</option>
-                <option>I</option>
-                <option>II</option>
-                <option>III</option>
-                <option>IV</option>
-                <option>V</option>
-                <option>V1</option>
-                <option>VII</option>
-                <option>VIII</option>
-                <option>IX</option>
-                <option>X</option>
-              </select>
+                            <div id="review-returnee-details" style="display: contents;">
+                                <p style="grid-column: 1 / -1;"><strong>Reason for Leaving:</strong> <span id="rev_reason_leaving"></span></p>
+                                <p style="grid-column: 1 / -1;"><strong>Reason for Returning:</strong> <span id="rev_reason_returning"></span></p>
+                            </div>
+                        </div>
+                        <h4 style="margin-top: 15px;">Uploaded Documents</h4>
+                        <div id="rev_docs_container"></div>
+                      </div>
+                    </div>
+                </form>
+                
+                <div class="buttons">
+                    <button type="button" id="prevBtn">Back</button>
+                    <button type="button" id="nextBtn">Next</button>
+                </div>
             </div>
 
-            <div class="form-group"><label>Age *</label><input type="number" name="age" min="1" required></div>
-            <div class="form-group"><label>Status *</label><input type="text" name="status" required></div>
-            <div class="form-group"><label>Religion *</label><input type="text" name="religion" required></div>
-            <div class="form-group"><label>Nationality *</label><input type="text" name="nationality" required></div>
-            <div class="form-group"><label>Birthday *</label><input type="date" name="birthdate" required></div>
-            <div class="form-group"><label>Place of Birth *</label><input type="text" name="place_of_birth" required></div>
+           <div id="success-message" style="display: none;">
+                <div class="success">
+                    <h2>✅ Registration Complete</h2>
+                    <p id="success-text"></p>
+                    <p><strong>Reference Number:</strong> <span id="success-ref-id"></span></p>
 
-            <div class="form-group">
-              <label>Gender *</label>
-              <select name="sex" required>
-                <option value="" disabled selected>Select</option>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
+                    <!-- Feedback Section -->
+                    <div class="feedback-section">
+                    <h3>How was your experience?</h3>
+                    <div class="feedback-emojis">
+                        <span class="emoji" data-value="1">😞</span>
+                        <span class="emoji" data-value="2">😐</span>
+                        <span class="emoji" data-value="3">🙂</span>
+                        <span class="emoji" data-value="4">😊</span>
+                        <span class="emoji" data-value="5">😍</span>
+                    </div>
+                    <p class="feedback-thanks" style="display:none; margin-top:10px; color:#16a34a; font-weight:600;">Thanks for your feedback!</p>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                    <button type="button" id="registerAgainBtn">Register Another Student</button>
+                    </div>
+                </div>
             </div>
 
-            <h3 style="grid-column: 1 / -1;">Address Information</h3>
-            <div class="form-group"><label>Block / Lot / House No. *</label><input type="text" name="lot_blk" required></div>
-            <div class="form-group"><label>Street *</label><input type="text" name="street" required></div>
-            <div class="form-group"><label>Barangay *</label><input type="text" name="barangay" required></div>
-            <div class="form-group"><label>Municipality / City *</label><input type="text" name="municipality" required></div>
-            <div class="form-group"><label>Province *</label><input type="text" name="province" required></div>
-            <div class="form-group"><label>ZIP Code *</label><input type="text" name="zipcode" required></div>
-          </div>
         </div>
+    </section>
 
-        <!-- Step 3 -->
-        <div class="form-step">
-          <div class="form-group"><label>Last School Attended *</label><input type="text" name="last_school" required></div>
-
-          <div class="form-group">
-            <label>Student Status *</label>
-            <select name="student_status" required>
-              <option value="">-- Select Status --</option>
-              <option>New Enrollee</option>
-              <option>Transferee</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Year Level *</label>
-            <select name="yearLevel" required>
-              <option value="">-- Select Year Level --</option>
-              <option>G11</option>
-              <option>G12</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>Preferred Strand *</label>
-            <select name="strand" required>
-              <option value="">-- Select Strand --</option>
-              <option>TVL - Electrical Installation and Management (EIM)</option>
-              <option>TVL - Automotive Servicing (ATS)</option>
-              <option>ACAD - Humanities & Social Sciences (HUMSS)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="form-step">
-          <h3>Guardian Information</h3>
-          <div class="form-group"><label>Guardian Name *</label><input type="text" name="guardian_name" required></div>
-          <div class="form-group">
-            <label>Relationship *</label>
-            <select name="relationship" required>
-              <option value="">-- Select Relationship --</option>
-              <option>Father</option>
-              <option>Mother</option>
-              <option>Legal Guardian</option>
-            </select>
-          </div>
-          <div class="form-group"><label>Contact Number *</label><input type="tel" name="guardian_phone" placeholder="09XXXXXXXXX" pattern="^0\d{10}$" maxlength="11" required></div>
-          <div class="form-group"><label>Occupation *</label><input type="text" name="occupation" required></div>
-        </div>
-
-        <!-- Step 5 -->
-        <div class="form-step">
-          <div class="form-group"><label>Birth Certificate (PDF or Image) *</label><input type="file" name="birth_cert" accept=".pdf, image/*" required></div>
-          <div class="form-group"><label>Form 137 (PDF or Image) *</label><input type="file" name="form137" accept=".pdf, image/*" required></div>
-          <div class="form-group"><label>Good Moral (PDF or Image) *</label><input type="file" name="good_moral" accept=".pdf, image/*" required></div>
-        </div>
-
-        <!-- Step 6 -->
-        <div class="form-step" id="reviewStep">
-          <h3>Review Your Information</h3>
-          <p>Double-check all the details below before submitting your registration.</p>
-
-          <div class="review-section">
-            <h4>Account Information</h4>
-            <p><strong>Email:</strong> <span id="rev_email"></span></p>
-            <p><strong>Mobile Number:</strong> <span id="rev_phone"></span></p>
-
-            <h4>Personal Information</h4>
-            <p><strong>Name:</strong> <span id="rev_name"></span></p>
-            <p><strong>Age:</strong> <span id="rev_age"></span></p>
-            <p><strong>Gender:</strong> <span id="rev_sex"></span></p>
-            <p><strong>Birthday:</strong> <span id="rev_birthdate"></span></p>
-            <p><strong>Place of Birth:</strong> <span id="rev_place_of_birth"></span></p>
-            <p><strong>Address:</strong> <span id="rev_address"></span></p>
-            <p><strong>Religion:</strong> <span id="rev_religion"></span></p>
-            <p><strong>Nationality:</strong> <span id="rev_nationality"></span></p>
-
-            <h4>Academic Information</h4>
-            <p><strong>Last School Attended:</strong> <span id="rev_last_school"></span></p>
-            <p><strong>Student Status:</strong> <span id="rev_student_status"></span></p>
-            <p><strong>Preferred Strand:</strong> <span id="rev_strand"></span></p>
-
-            <h4>Guardian Information</h4>
-            <p><strong>Guardian Name:</strong> <span id="rev_guardian_name"></span></p>
-            <p><strong>Relationship:</strong> <span id="rev_relationship"></span></p>
-            <p><strong>Contact Number:</strong> <span id="rev_guardian_phone"></span></p>
-            <p><strong>Occupation:</strong> <span id="rev_occupation"></span></p>
-
-            <h4>Uploaded Documents</h4>
-            <p><strong>Birth Certificate:</strong> <span id="rev_birth_cert"></span></p>
-            <p><strong>Form 137:</strong> <span id="rev_form137"></span></p>
-            <p><strong>Good Moral:</strong> <span id="rev_good_moral"></span></p>
-          </div>
-        </div>
-
-
-        <!-- ✅ Buttons -->
-        <div class="buttons">
-          <button type="button" id="prevBtn">Back</button>
-          <button type="button" id="nextBtn">Next</button>
-        </div>
-
-        <!-- ✅ Success Message -->
-        <div class="success" id="successMsg" style="display:none;">
-          <h2>✅ Registration Complete</h2>
-          <p>Thank you! We’ve received your application.</p>
-          <button onclick="window.location.href='../home'">Register Again</button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-<div id="privacyModal" class="privacy-modal">
-  <div class="privacy-content">
-    <div class="privacy-card">
-      <h1>Data Privacy Notice and Consent Form</h1>
-      <p><strong>Southville 8B Senior High School</strong> values and respects your right to privacy and ensures that all personal information you provide will be processed in accordance with the Data Privacy Act of 2012 (R.A. 10173).</p>
-
-      <h2>1. Purpose of Data Collection</h2>
-      <p>Your personal data will be collected, used, and stored for the following purposes:</p>
-      <ul>
-        <li>To evaluate your eligibility for admission and enrollment.</li>
-        <li>To maintain accurate student records for administrative and academic purposes.</li>
-        <li>To comply with reporting requirements to the Department of Education and other authorized agencies.</li>
-        <li>To communicate school-related updates, events, and announcements.</li>
-      </ul>
-
-      <h2>2. Types of Personal Data Collected</h2>
-      <p>The following information may be collected from you:</p>
-      <ul>
-        <li>Personal details (name, age, sex, nationality, religion, etc.)</li>
-        <li>Contact information (email, address, phone number)</li>
-        <li>Educational background (previous schools, grades, etc.)</li>
-        <li>Documents (birth certificate, Form 137, good moral certificate)</li>
-      </ul>
-
-      <h2>3. Data Protection and Security</h2>
-      <p>All information will be stored securely in the school’s student database and will only be accessed by authorized personnel. The school implements appropriate physical, technical, and organizational measures to safeguard your data from unauthorized access, disclosure, alteration, or destruction.</p>
-
-      <h2>4. Data Retention and Sharing</h2>
-      <p>Your personal data will be retained for as long as necessary for the fulfillment of the above-stated purposes or as required by law. Sharing of data will only occur with your consent or when mandated by regulatory authorities.</p>
-
-      <div class="consent-section">
-        <p>By clicking “Proceed to Admission Portal,” I hereby give my consent to <strong>Southville 8B Senior High School</strong> to collect, process, and store my personal data for legitimate school-related purposes. I confirm that I have read and understood this Data Privacy Notice.</p>
-      </div>
-
-      <div class="modal-buttons">
-        <button class="proceed-btn">Proceed to Admission Portal</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-    <script src="../js/EnrollmentForm.js"></script>
-
+    <script src="../js/EnrollmentForm.js">
+    </script>
 </body>
 </html>
