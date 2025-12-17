@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="index.css" />
-  <link rel="stylesheet" href="alldesign.css" />
+  <link rel="stylesheet" href="../css/index.css" />
+  <link rel="stylesheet" href="../css/alldesign.css" />
   <title>SHS</title>
   <style>
     /* ============================= */
@@ -204,6 +204,7 @@
       transition: color 0.3s;
       display: flex;
       align-items: center;
+      justify-content: center;
     }
     
     .footer-links a:hover {
@@ -231,16 +232,12 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      color: white;
+      width: 100%;
+      color: blue;
       transition: all 0.3s;
     }
     
     .social-links a:hover {
-      background: #facc15;
       transform: translateY(-3px);
     }
     
@@ -360,7 +357,7 @@
             <div class="info-text">
               <p class="subtitle">Visit our</p>
               <h3>Office of the Principal</h3>
-              <a href="principal.html" class="learn-btn">Learn More ></a>
+              <a href="#" class="learn-btn">Learn More ></a>
             </div>
           </div>
         </div>
@@ -391,10 +388,7 @@
             <h3>About Southville 8B</h3>
             <p>Southville 8B Senior High School is committed to providing quality education that prepares students for higher education and future careers through specialized tracks in TVL and HUMSS.</p>
             <div class="social-links">
-              <a href="#" aria-label="Facebook">f</a>
-              <a href="#" aria-label="Twitter">t</a>
-              <a href="#" aria-label="Instagram">ig</a>
-              <a href="#" aria-label="YouTube">yt</a>
+              <a href="#" aria-label="Facebook">Facebook: DepEd Tayo Southville 8B SHS</a>
             </div>
           </div>
           
@@ -440,7 +434,7 @@
     grid.innerHTML = `<div class="announcement-loading">Loading latest announcements...</div>`;
     
     try {
-      const res = await fetch("http://localhost:8000/api/announcements/latest");
+      const res = await fetch("https://desktop-backend.onrender.com/api/announcements/latest");
       const announcements = await res.json();
       
       // Separate featured and regular announcements
